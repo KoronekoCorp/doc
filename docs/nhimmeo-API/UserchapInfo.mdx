@@ -1,0 +1,37 @@
+---
+sidebar-position: 1
+title: UserchapInfo
+description: 书籍总述(API)
+
+options:
+  menu:
+    weight: 10
+    category: nhimmeo-API
+---
+import style from '../theme.css';
+import { HTTP } from './http'
+
+# UserchapInfo
+
+:::tipAPI基础信息
+- 接口功能：获取书籍ID对应的分享章节摘要信息
+- 请求方式：GET
+- 频率限制：<span id="blue">10/s*</span>
+- 更新状态：<span id="green">已完工</span>
+
+> *：此处频率限制为总频率限制
+:::
+
+<HTTP text={"GET https://api.phantom-sea-limited.ltd/nhimmeo/UserchapInfo/{Bookid}"}/>
+
+```tsx title=Response
+[
+    {
+        "chapters": number,
+        "modes": string | null
+    }
+]
+```
+
+特殊说明：
+mode包含
