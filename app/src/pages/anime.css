@@ -1,0 +1,168 @@
+.anime {
+    -moz-animation: fadeInDown 2s;
+    -webkit-animation: fadeInDown 2s;
+    animation: fadeInDown 2s;
+}
+
+.animetitle {
+    margin: 0;
+    font-family: 'Noto Serif SC';
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all 0.8s ease !important;
+    margin: auto;
+    color: var(--theme-skin, #505050);
+
+    /* width: 65%;
+    background: var(--infor_bar_bgcolor, rgba(255, 255, 255, 0.8));
+    padding: 15px;
+    margin-top: 22px;
+    letter-spacing: 0;
+    line-height: 30px;
+    border-radius: 15px;
+    box-sizing: initial;
+    white-space: nowrap;
+    font-weight: var(--global-font-weight);
+    backdrop-filter: blur(10px);
+    transition: all 0.8s ease !important; */
+}
+
+.animetitle:hover {
+    color: var(--theme-skin-matching);
+    transition: all .4s;
+}
+
+@keyframes fadeInDown {
+    0% {
+        -moz-transform: translateY(-100%);
+        -ms-transform: translateY(-100%);
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+        opacity: 0
+    }
+
+    50% {
+        -moz-transform: translateY(-100%);
+        -ms-transform: translateY(-100%);
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+        opacity: 0
+    }
+
+    100% {
+        -moz-transform: translateY(0%);
+        -ms-transform: translateY(0%);
+        -webkit-transform: translateY(0%);
+        transform: translateY(0%);
+        opacity: 1
+    }
+}
+
+[data-theme='dark']:root {
+    --theme-skin: #66c7ff;
+    --theme-skin-matching: #ff66c9;
+}
+
+:root {
+    --theme-skin: #ff66c9;
+    --theme-skin-matching: #66c7ff;
+    --infor_bar_bgcolor: rgba(255, 255, 255, 0.8);
+    --style_menu_selection_radius: 15px;
+    --post_list_matching_color: ;
+    --load_nextpage_svg: url("https://dl.phantom-sea-limited.ltd/Fuukei/Public_Repository/master/vision/load_svg/ball.svg");
+    --style_menu_radius: 10px;
+    --post-list-thumb: #e8e8e8;
+    --friend-link-shadow: ;
+    --friend-link-title: ;
+    --comment_area_matching: ;
+    --comment_area_shadow: ;
+    --shuoshuo_background_color1: #ffe066;
+    --shuoshuo_background_color2: #ffcc00;
+    --inline_code_background_color: ;
+    --theme-skin-dark: #ffcc00;
+    --global-font-weight: 300;
+    --theme-dm-background_transparency: 1;
+    --exhibition_area_matching_color: ;
+    --inline_code_background_color_in_dark_mode: ;
+}
+
+.headertop-down {
+    position: absolute;
+    bottom: 50px;
+    left: calc(50% - 42px);
+    z-index: 5;
+    animation-name: float-down;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+#banner_wave_1 {
+    padding: 4rem 0;
+    width: auto;
+    height: 65px;
+    _filter: alpha(opacity=80);
+    position: absolute;
+    bottom: 0;
+    width: 400%;
+    left: -236px;
+    z-index: 4;
+    opacity: 1;
+    transiton-property: opacity, bottom;
+    transition-duration: .4s, .4s;
+    animation-name: move2;
+    animation-duration: 240s;
+    animation-fill-mode: backwards;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+#banner_wave_2 {
+    padding: 4rem 0;
+    width: auto;
+    height: 80px;
+    _filter: alpha(opacity=80);
+    position: absolute;
+    bottom: 0;
+    width: 400%;
+    left: 0;
+    z-index: 3;
+    opacity: 1;
+    transiton-property: opacity, bottom;
+    transition-duration: .4s, .4s;
+    animation-name: move2;
+    animation-duration: 160s;
+    animation-fill-mode: backwards;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+#banner_wave_1 {
+    background: url(/img/wave1.png) repeat-x;
+}
+
+#banner_wave_2 {
+    background: url(/img/wave2.png) repeat-x;
+}
+
+@keyframes move1 {
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+@keyframes move2 {
+    100% {
+        background-position: -100% 0;
+    }
+}
+
+svg {
+    fill: var(--theme-skin);
+    transition: all 0.8s ease !important;
+}
+
+svg:hover {
+    fill: var(--theme-skin-matching);
+    transition: all .4s;
+}
