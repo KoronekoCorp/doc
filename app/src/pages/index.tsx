@@ -1,4 +1,4 @@
-// code from https://github.com/Messiahhh/blog/blob/master/src/components/HomepageFeatures/index.js#L49
+// some code from https://github.com/Messiahhh/blog/blob/master/src/components/HomepageFeatures/index.js#L49
 import React, { useEffect } from "react";
 import clsx from "clsx";
 import Layout from "@theme/Layout";
@@ -208,7 +208,7 @@ class WebGL {
     return this;
   }
 
-  loadTexture(image) {
+  loadTexture(image: TexImageSource) {
     const texture = this.gl.createTexture();
 
     this.gl.activeTexture(this.gl["TEXTURE" + this.textures.length]);
@@ -278,7 +278,7 @@ class WebGL {
   }
 }
 
-function loadImage(path: string) {
+function loadImage(path: string): Promise<HTMLImageElement> {
   return new Promise((resolve) => {
     const image = new Image();
     image.src = path;
