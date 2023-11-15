@@ -1,7 +1,7 @@
 ---
-sidebar_position: 3
-title: UserchapInfo
-description: 书籍总述
+sidebar_position: 2
+title: Userchap
+description: Userchap列表
 
 options:
   menu:
@@ -11,7 +11,7 @@ options:
 import style from '../theme.css';
 import { HTTP } from './http'
 
-# UserchapInfo
+# Userchap
 
 :::tip API基础信息
 - 接口功能：获取书籍ID对应的分享章节摘要信息
@@ -22,7 +22,7 @@ import { HTTP } from './http'
 > *：此处频率限制为总频率限制
 :::
 
-        <HTTP text={"GET /UserchapInfo/{Bookid}"} />
+<HTTP text={"GET /userchap/{pageid}"}/>
 
 ### 响应
 
@@ -31,21 +31,25 @@ import { HTTP } from './http'
 ```tsx title="Response"
 [
     {
-        "chapters": 15,
+        "book_id": 100385826,
+        "chapters": 16,
         "modes": "vip"
+    },
+    {
+        "book_id": 100342791,
+        "chapters": 194,
+        "modes": "marauder vip"
     }
 ]
 ```
-
-特殊说明：
-mode包含vip、marauder
 
 ### 代码片段
 
 可直接使用的TypeScirpt类型
 ```ts
-export interface UserchapInfo {
-    chapters: number
-    modes: 'post vip' | 'marauder' | 'marauder vip' | 'vip' | null
+export interface Userchap {
+    book_id: number,
+    chapters: number,
+    modes: 'post vip' | 'marauder' | 'marauder vip' | 'vip'
 }
 ```

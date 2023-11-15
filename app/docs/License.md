@@ -1,5 +1,5 @@
 ---
-sidebar-position: 4
+sidebar_position: 99
 title: LICENSE
 description: MIT LICENSE
 ---

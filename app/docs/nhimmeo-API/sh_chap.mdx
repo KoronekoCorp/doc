@@ -1,0 +1,62 @@
+---
+sidebar_position: 6
+title: sh_chap
+description: 章节具体信息
+
+options:
+  menu:
+    weight: 10
+    category: nhimmeo-API
+---
+import style from '../theme.css';
+import { HTTP } from './http'
+
+# Userchap
+
+:::tip API基础信息
+- 接口功能：获取章节ID对应的分享章节信息
+- 请求方式：GET
+- 频率限制：<span id="blue">10/10s*</span>
+- 更新状态：<span id="green">已完工</span>
+
+> *：此处频率限制为总频率限制
+:::
+
+        <HTTP text={"GET /sh_chap/{chapid}"} />
+
+### 响应
+
+以下示例显示了相应的响应。
+
+```tsx title="Response"
+[
+    {
+        "book_id": 100385826,
+        "chapter_id": 111003170,
+        "author_name": "Kaixa",
+        "title": "第五十八章 商谈",
+        "stime": 1699650185,
+        "spath": "111003170-11-10-2",
+        "host": "t",
+        "mode": "vip"
+    }
+]
+```
+
+### 代码片段
+
+可直接使用的TypeScirpt类型
+```ts
+export interface sh_chap {
+    book_id: number,
+    chapter_id: number,
+    /** 分享者 */
+    author_name: string,
+    title: string
+    stime: number,
+    spath: string
+    /** 托管类型 */
+    host: 't' | 'i',
+    mode: 'post' | 'marauder' | 'vip'
+}
+```

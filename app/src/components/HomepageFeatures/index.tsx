@@ -87,7 +87,7 @@ export default function HomepageFeatures(): JSX.Element {
             <div className="text--center padding-horiz--md">
               <Heading as="h1">Nhimmeo for NextJS</Heading>
               <p>Nhimmeo的Nextjs版本，外带可能存在的API服务</p>
-              <p>项目地址：<Link href='https://github.com/KoronekoCorp/Nhimmeo'>https://github.com/KoronekoCorp/Nhimmeo</Link></p>
+              <p>项目地址：未开源</p>
               <p>演示服务：<Link href='https://n.koroneko.co/'>N.koroneko.co</Link></p>
             </div>
           </div>
