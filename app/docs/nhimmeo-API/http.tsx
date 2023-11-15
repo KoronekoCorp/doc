@@ -1,4 +1,3 @@
-import * as React from 'react'
 import style from './http.module.css'
 
 export function HTTP({ text }: { text: string }) {

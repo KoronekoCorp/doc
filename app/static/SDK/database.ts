@@ -3,7 +3,7 @@ import { base64DecToArr, UTF8ArrToStr } from './Base64'
 
 class ProxyDB {
     RemoteProxy: string
-    constructor(url: string) {
+    constructor(url: string = "https://koroneko.co/nhimmeo") {
         this.RemoteProxy = url
     }
 
@@ -70,3 +70,5 @@ class ProxyDB {
         }
     }
 }
+
+export { ProxyDB }
