@@ -93,13 +93,13 @@ export default function HomepageFeatures(): JSX.Element {
           </div>
           <div className={clsx('col col--6', styles.row)}>
             <div className="text--center padding-horiz--md">
-              <img src='/img/0.png' />
+              <img className={styles.anime} src='/img/0.png'/>
             </div>
           </div>
-          <div className={clsx('col col--12')} style={{ height: "5vh" }}></div>
+          <div className={clsx('col col--12')} style={{ height: "10vh" }}></div>
           <div className={clsx('col col--6', styles.row)}>
             <div className="text--center padding-horiz--md">
-              <img src='/img/1.png' />
+              <img className={styles.anime} src='/img/1.png'/>
             </div>
           </div>
           <div className={clsx('col col--6', styles.row)}>
