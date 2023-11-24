@@ -55,6 +55,7 @@ const config: Config = {
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
       title: 'Koroneko Corp',
+      hideOnScroll: true,
       logo: {
         alt: 'Koroneko Corp',
         src: 'img/logo.png',
