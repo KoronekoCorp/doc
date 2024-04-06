@@ -33,14 +33,25 @@ import style from '../theme.css';
 
 4. API不会收集你的请求本身之外的任何信息
 
+
+:::info API说明
+
+API分为两个部分：数据库API 与 章节API
+:::
+
 import DocCardList from '@theme/DocCardList';
 
-    <DocCardList items={
-          [
-            {
-              type: 'link',
-              label: '查看nhimmeo API doc',
-              href: "/docs/nhimmeo-API",
-            }
-          ]
-        } />
+<DocCardList items={
+    [
+        {
+            type: 'link',
+            label: '数据库API doc',
+            href: "/docs/nhimmeo-API",
+        },
+        {
+            type: 'link',
+            label: '章节API doc',
+            href: "/docs/oauth-API/nhChaper",
+        }
+    ]
+} />

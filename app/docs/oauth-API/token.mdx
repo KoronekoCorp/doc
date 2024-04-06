@@ -1,0 +1,71 @@
+---
+sidebar_position: 2
+description: Oauth 凭证说明
+
+options:
+  menu:
+    weight: 10
+    category: oauth-API
+---
+
+# 凭证
+
+Oauth 服务涉及的凭证总共存在两种：
+
+- 账户凭证
+- 资源凭证
+
+### 账户凭证
+
+在[用户中心](https://oauth.koroneko.co/login)登录之后，右侧/下侧(移动视图)，点击`获取账户令牌`即可，当然打开F12获取名为oauth的cookie也可以
+
+```txt title="凭证示例"
+eyJhbGci.
+.hPI6gyUSrKWLD2ri.-Eul5TunCfsbvDj7K6XrlDniTKTGHC4lSCiZzQmZw635C_55UP5vaEPvA
+.UHwaJYZfCY5HYlIUuF7UZA
+```
+:::warning
+
+账户凭证有效期30天
+
+账户凭证即`cookie`
+:::
+
+在获取凭证之后，可以使用如下的接口进行凭证刷新
+
+import { HTTP } from '../http'
+
+<HTTP text={
+    "GET https://oauth.koroneko.co/auth/access\n\n" +
+    JSON.stringify({
+        "Cookie": "eyJhbGci..hPI6gyUSrKWLD2ri.-Eul5TunCfsbvDj7K6XrlDniTKTGHC4lSCiZzQmZw635C_55UP5vaEPvA.UHwaJYZfCY5HYlIUuF7UZA"
+    }, null, 2)
+} />
+
+#### 响应
+
+<HTTP text={
+    "HTTP/1.1 200 OK\n" +
+    "Content-type: application/json\n\n" +
+    JSON.stringify({ "code": 200, "email": "test@test.com", "accesstoken": "eyJhbGciOiJkaXI..uxpDMZKCL308J8pt.9zaX9xWWFkrhoiVgOrxalo8HwqzqGuqArZw.C3nn5KqPs_Tz8sA" }, null, 2)
+} title='HTTP Response' />
+
+同时，响应会设置一个`oauth`的cookie，你也可以从请求头获取数据，为此，也可以使用如下终结点
+
+<HTTP text={
+    "GET https://oauth.koroneko.co/auth/refresh"
+} />
+
+
+### 资源凭证
+
+资源凭证仅用于访问部分需要授权的资源，例如：nhimmeo的章节内容
+
+:::warning
+
+资源凭证有效期不等
+
+资源凭证与账户凭证禁止同时使用（即使用认证头`Authorization`时不携带`cookie`）
+
+请查阅具体API文档
+:::

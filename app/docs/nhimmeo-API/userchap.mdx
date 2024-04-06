@@ -9,7 +9,7 @@ options:
     category: nhimmeo-API
 ---
 import style from '../theme.css';
-import { HTTP } from './http'
+import { HTTP } from '../http'
 
 # Userchap
 
@@ -50,6 +50,6 @@ import { HTTP } from './http'
 export interface Userchap {
     book_id: number,
     chapters: number,
-    modes: 'post vip' | 'marauder' | 'marauder vip' | 'vip'
+    modes: string
 }
 ```

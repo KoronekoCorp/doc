@@ -1,0 +1,160 @@
+---
+sidebar_position: 4
+description: Chaper API说明
+
+options:
+  menu:
+    weight: 10
+    category: oauth-API
+---
+
+# 章节API说明
+
+:::tip 前情提要
+- 此API需要使用`账户凭证`，请查看[凭证](/docs/oauth-API/token)
+- 此API涉及鉴权
+:::
+
+import { HTTP } from '../http'
+
+### 获取资源凭证
+
+资源凭证按照不同书籍ID区分，单个书籍下的全部章节仅需要该书籍ID的授权
+
+携带账户凭证(cookie)，请求如下终结点
+
+<HTTP text={
+    "GET https://oauth.koroneko.co/auth/user/grantBookAccess/[bookid]\n\n" +
+    JSON.stringify({
+        "Cookie": "eyJhbGci..hPI6gyUSrKWLD2ri.-Eul5TunCfsbvDj7K6XrlDniTKTGHC4lSCiZzQmZw635C_55UP5vaEPvA.UHwaJYZfCY5HYlIUuF7UZA"
+    }, null, 2)
+} />
+
+:::warning
+
+资源凭证的过期时间
+
+- 存在未到期的授权时，采用旧授权的到期时间
+- 不存在授权时，当前时间的7天后
+
+也可以通过用户信息API获取到期时间
+:::
+
+<HTTP text={
+    "HTTP/1.1 200 OK\n" +
+    "Content-type: application/json\n\n" +
+    JSON.stringify({"code":200,"token":"eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..j4fTaAaYuL3IcLot.ujDlB3oXy7NFecCL-fDMqrPUb5JCYrmDsgVFH1rqkPuiqVeJqJzDT_Vmf-eJ7DnPwCCAKp5305rqaYKj2cRy2HrVOPQM2v6E_k1qGGPaQuZ3_UWnjXztJuaVrM-xTQmEqF6f.xBgyQT4-VXrUPx9PTbn1Dw"}, null, 2)
+} title='HTTP Response' />
+
+响应中的token即为对应书籍ID的资源凭证
+
+### 请求资源
+
+#### 获取目录
+
+<HTTP text={
+    "GET https://oauth.koroneko.co/api/object/[bookid]\n\n" +
+    "Authorization: eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..j4fTaAaYuL3IcLot.ujDlB3oXy7NFecCL-fDMqrPUb5JCYrmDsgVFH1rqkPuiqVeJqJzDT_Vmf-eJ7DnPwCCAKp5305rqaYKj2cRy2HrVOPQM2v6E_k1qGGPaQuZ3_UWnjXztJuaVrM-xTQmEqF6f.xBgyQT4-VXrUPx9PTbn1Dw"
+} />
+
+:::warning
+Authorization头部不需要Bearer/Basic指定令牌类型
+:::
+
+<HTTP text={
+    "HTTP/1.1 200 OK\n" +
+    "Content-type: application/json\n\n" +
+    JSON.stringify({
+        "code": 200,
+        "data": [
+            {
+                "Key": "100307533/108637281.json",
+                "LastModified": "2024-03-07T07:19:06.394Z",
+                "ETag": "\"2aae769fe34660511de42c0428dc9005\"",
+                "Size": 7451,
+                "StorageClass": "1"
+            },
+            {
+                "Key": "100307533/108637331.json",
+                "LastModified": "2024-03-07T07:19:06.158Z",
+                "ETag": "\"327703b388c7438e927f71db3eac1aa4\"",
+                "Size": 7431,
+                "StorageClass": "1"
+            },
+        ]
+    }, null, 2)
+} title='HTTP Response' />
+
+响应会列出该书籍ID所拥有的所有子章节
+
+#### 获取章节
+
+依据上述获取的章节列表，可以获取具体的章节内容
+
+:::warning
+Authorization头部不变
+
+请忽略文件后缀`.json`，所有`[]`内的参数均为数字
+:::
+
+<HTTP text={
+    "GET https://oauth.koroneko.co/api/object/[bookid]/[chapid]\n\n" +
+    "Authorization: eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..j4fTaAaYuL3IcLot.ujDlB3oXy7NFecCL-fDMqrPUb5JCYrmDsgVFH1rqkPuiqVeJqJzDT_Vmf-eJ7DnPwCCAKp5305rqaYKj2cRy2HrVOPQM2v6E_k1qGGPaQuZ3_UWnjXztJuaVrM-xTQmEqF6f.xBgyQT4-VXrUPx9PTbn1Dw"
+} />
+
+
+<HTTP text={
+    "HTTP/1.1 200 OK\n" +
+    "Content-type: application/json\n\n" +
+    JSON.stringify({
+        "code": 200,
+        "chapter_index": null,
+        "book_id": 100307533,
+        "chapter_id": 108637331,
+        "title": null,
+        "author_name": "STV",
+        "stime": 1672506000,
+        "spath": "108637331-04-09",
+        "mode": "marauder",
+        "host": "t",
+        "storj_synced": 1,
+        "id": 320210,
+        "txt": "　　「飘散着小雨的阪神赛马场。」\n　　「所有选手都已经入闸。」\n　　「比赛，现在——」\n　　「开始！」\n　　随着闸门弹开，17位马娘都是冲了出去。\n　　佐仓白目盯着场中的东海帝王与目白麦昆的身影，心中有着微微的不忍。\n　　这两位马娘她都非常喜欢，且都是她的队员，比起某一方获胜，她更不希望看到其中一方落败。\n　　此刻的北部玄驹与里见光钻都是心中焦急，紧张地要死。\n　　两位马娘都是一同转头看向了佐仓白目，齐声询问：\n　　“训练员桑，你觉得这一次谁会赢呢？”\n　　“......”\n　　佐仓白目并没有第一时间开口说话，而是在等了片刻之后，这才缓缓说道：\n　　“帝王跟麦昆，决胜服都是露脐装啊...”\n　　北部玄驹＆里见光钻＆醒目飞鹰：“？？？”\n　　三位马娘听了佐仓白目的话，都是一脸懵逼，接着三个人同时得出了一个相同的结论：\n　　“训练员桑又犯病了。”\n　　--\n　　会场里面，不出所料，目白善信再次使出了她的爆领跑战术。\n　　她哪怕面对如此多实力强悍的马娘，依旧是坚持当初待兼福来为她占卜出的爆领跑跑法。\n　　「冲在最前面的果然还是目白善信，她贯彻了自己一贯以来的爆领跑跑法，不过貌似并没有能够与身后的马娘拉开很大的差距。」\n　　「在她身后4马身左右位置的是目白麦昆，而在目白麦昆身后的是东海帝王。」\n　　「位列第四的是待兼诗歌剧，她后面紧跟着的是西野花。」\n　　「米浴此刻处在了第六名的位置。」\n　　这一次的整体节奏偏快，毕竟只是2200米的中距离赛道，节奏上肯定要比长距离赛道要快出不少。\n　　在起-点开始300米的下坡过后，迎来的便是之前佐仓白目特意让东海帝王与是目白麦昆练习过无数遍的急坡。\n　　一个比起京都赛马场坡度要陡一倍的急坡。\n　　「目白善信率先踏上了急坡，速度稍稍出现了一丝减慢。」\n　　这种事情无可厚非，毕竟大多数马娘在这里都是要掉速，因而也没有过多人对于这个急坡在意。\n　　再加上这个急坡虽然陡，但也只有两米高，比起京都赛场的那个四米的陡坡矮了一半。\n　　包括丸善斯基与鲁道夫象征等人在内，并没有因为目白善信在陡坡上面的掉速出现什么异样的反应。\n　　原本，她们认为，焦灼的部分应该是出现在比赛的中后盘，前面并没有过多可圈可点的地方。\n　　可当三位实力顶尖的马娘在见到了随后踏上了这个急坡的目白麦昆的姿势之后，却都是倏然变色。\n　　「目白麦昆也上坡了！好...好快！目白麦昆的速度在急坡上面没有一点点衰减，她甚至保持着自己在平底上面的速度，飞快地冲上了急坡！」\n　　「紧随其后的是东海帝王，她也踏上了急坡...什么？！东海帝王也与目白麦昆一样，以着特别的姿势爬坡，速度没有一丝丝衰减！」\n　　『不亏都是同一位训练员训练出来的马娘呢，这种爬坡不掉速的姿势，真是出色呢。』\n　　观众席上面传来一阵阵的惊呼之声，显然有不少观众都是被目白麦昆与东海帝王两人的爬坡姿势给惊艳到了。\n　　面对一个比起京都赛马场陡了一倍的急坡，竟然速度没有出现丝毫的衰减，这种爬坡方式简直可以称之为赏心悦目。\n　　“真是完美的爬坡啊，不愧是现役最强的两位马娘呢。”千明代表笑着评价了一句。\n　　但此刻她的旁边，丸善斯基与鲁道夫象征的表情却是变了颜色，她们二人虽然也惊艳与东海帝王与目白麦昆的爬坡之快，但却是在目白麦昆与东海帝王二人的爬坡姿势之中寻得了一丝熟悉的感觉。\n　　“鲁道夫，你有没有觉得，麦昆与帝王的爬坡方式，很有一种熟悉的感觉？”丸善斯基问道。\n　　“这种爬坡没有丝毫迟缓，行云流水的爬坡方式，总觉得有点像麦昆四连霸春季天皇赏的那个夜晚，你我在学院的赛道见到的那个名叫‘小仓’的马娘的爬坡方式。”\n　　鲁道夫象征一眼就认出来了目白麦昆与东海帝王二人的爬坡姿势跟佐仓白目一模一样。\n　　“东京赛马场的那个急坡只有1.4米高，但是坡度是跟阪神赛马场一样的！”丸善斯基一下子发现了问题所在，倏地蹙眉看向了鲁道夫象征。\n　　“那个小仓是在研究麦昆与帝王在阪神赛马场的最速爬坡方式！”鲁道夫象征很快便意识到了这一点，并且持续展开联想。\n　　“说起来，当时出面为小仓解围的人是理事长，而TCB的训练员佐仓小姐，跟理事长的关系又非常亲密...”\n　　说到这里，这一切都理通了。\n　　“那个小仓是被佐仓训练员托理事长请来为帝王与麦昆指定爬坡策略的马娘！”鲁道夫象征得出了这个结论。\n　　“说起来，在那天晚上之后，我就再也没有见过那只小马儿呢，有点想念呢。”\n　　丸善斯基手掌摸着脸颊，蓝色的瞳孔里面透露着一丝狡黠。\n　　“敢在你我面前，做出跑路决定的马娘，还真是头一回见呢。”\n　　“我本以为理事长会邀请小仓加入特雷森学院，结果一直没有等到她来，有点遗憾呢。”鲁道夫象征遗憾地说道。\n　　“鲁道夫，我有一种预感。我感觉，我们很快就会在与那位小仓见面的。”丸善斯基笑着说道，“等到过几天冥王星学院的学生来了以后，学校会开放校外的马娘进出，到时候说不定那个小仓还会过来。”\n　　“你们两个在说谁啊？什么小仓？”千明代表一头雾水地听着鲁道夫象征与丸善斯基的对话，心中有着无数的疑惑。\n　　--\n　　除了目白麦昆与东海帝王之外的马娘在这个急坡都是出现了些许的掉速，不过她们都觉得问题不大，这毕竟才只是序盘。\n　　掉落的速度可以很快地便弥补回来，并不会对比赛造成很大的影响。\n　　「即将迎来第一弯道，目白善信依旧保持着自己的领跑优势，不过这一次她貌似没有能够与身后第二位的目白麦昆拉开很大的差距，只有3马身左右的距离。」\n　　目白善信双臂快速挥动，感受着不远处身后传来的目白麦昆的压力，忍不住大吼：\n　　“麦昆，你搞什么啊！追得也太紧了吧！！”\n　　“都是姐妹，要不要这样啊！！！”\n　　--\n　　上一下麦昆跟帝王的决胜服图片。\n　　<img src=\"https://c1.kuangxiangit.com/uploads/chapterimgsnew/171/196779/220415/1649994709-100307533-108637331.jpg\" alt='帝王'>\n　　<img src=\"https://c1.kuangxiangit.com/uploads/chapterimgsnew/171/196779/220415/1649994721-100307533-108637331.jpg\" alt='麦昆'>\n　　都是露脐装，啧啧\n"
+    }, null, 2)
+} title='HTTP Response' />
+
+
+### 代码片段
+
+可直接使用的TypeScirpt类型，仅保留有用的属性
+```ts
+export interface ErrorRes {
+    code: 401 | 403 | 404
+}
+
+interface _Chapers {
+    code: 200
+    data: {
+        "Key": string,
+        "LastModified": string,
+        "ETag": string,
+        "Size": number,
+        "StorageClass": "1"
+    }[]
+}
+
+export type Chapers = _Chapers | ErrorRes
+
+interface _Chaper {
+    code: 200
+    book_id: number,
+    chapter_id: number,
+    /** 分享者 */
+    author_name: string,
+    stime: number,
+    mode: 'post' | 'marauder' | 'vip',
+    txt: string
+}
+
+export type Chaper = _Chaper | ErrorRes
+```
