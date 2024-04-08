@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 description: Chaper API说明
 
 options:
@@ -11,13 +11,13 @@ options:
 # 章节API说明
 
 :::tip 前情提要
-- 此API需要使用`账户凭证`，请查看[凭证](/docs/oauth-API/token)
-- 此API涉及鉴权
+- 此API需要使用`账户凭证`，请查阅[凭证](/docs/oauth-API/token)一节
+- 此API涉及单独鉴权
 :::
 
 import { HTTP } from '../http'
 
-### 获取资源凭证
+## 获取资源凭证
 
 资源凭证按照不同书籍ID区分，单个书籍下的全部章节仅需要该书籍ID的授权
 
@@ -48,9 +48,9 @@ import { HTTP } from '../http'
 
 响应中的token即为对应书籍ID的资源凭证
 
-### 请求资源
+## 请求资源
 
-#### 获取目录
+### 获取目录
 
 <HTTP text={
     "GET https://oauth.koroneko.co/api/object/[bookid]\n\n" +
@@ -87,7 +87,7 @@ Authorization头部不需要Bearer/Basic指定令牌类型
 
 响应会列出该书籍ID所拥有的所有子章节
 
-#### 获取章节
+### 获取章节
 
 依据上述获取的章节列表，可以获取具体的章节内容
 

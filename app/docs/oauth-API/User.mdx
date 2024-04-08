@@ -1,0 +1,116 @@
+---
+sidebar_position: 3
+description: User API说明
+
+options:
+  menu:
+    weight: 10
+    category: oauth-API
+---
+
+# User API
+
+:::warning 前情提要
+- 此API需要使用`账户凭证`，请查阅[凭证](/docs/oauth-API/token)一节
+- 一般而言，本章的任意接口没有任何使用需求
+:::
+
+## 获取用户信息
+
+import { HTTP } from '../http'
+
+<HTTP text={
+    "GET https://oauth.koroneko.co/auth/user\n" +
+    JSON.stringify({
+        "Cookie": "eyJhbGci..hPI6gyUSrKWLD2ri.-Eul5TunCfsbvDj7K6XrlDniTKTGHC4lSCiZzQmZw635C_55UP5vaEPvA.UHwaJYZfCY5HYlIUuF7UZA"
+    }, null, 2)
+} />
+
+<HTTP text={
+    "HTTP/1.1 200 OK\n" +
+    "Content-type: application/json\n\n" +
+    JSON.stringify({
+        "web": {
+            "all": 0,
+            "success": 0
+        },
+        "api": {
+            "download": 0,
+            "limit": 1,
+            "allow": [
+                {
+                    "bookid": 100307533,
+                    "time": 1713150751
+                }
+            ]
+        },
+        "upload": 0,
+        "email": "test@test.com",
+        "code": 200
+    }, null, 2)
+} title='HTTP Response' />
+
+
+| 参数 | 类型 | 描述 |
+| --- | --- |  --- |
+| `web` | `object` | 网页浏览统计数据 |
+| `api` | `object` |  API统计数据 |
+| `api.limit` | `number` |  API书籍授权数量上限 |
+| `api.allow` | `object` |  API书籍授权内容 |
+| `api.allow.bookid` | `number` |  API书籍授权中的书籍ID |
+| `api.allow.time` | `number` |  API书籍授权中的授权到期时间 |
+| `upload` | `number` |  上传统计 |
+| `email` | `string` |  用户邮箱(唯一标识) |
+| `code` | `number<200\|401>` |  请求码 |
+
+### 代码片段
+
+可直接使用的TypeScirpt类型，仅保留有用的属性
+
+```ts
+
+interface ErrorRes {
+    code: 401
+}
+
+interface _User {
+    code: 200
+    web: {
+        all: number,
+        success: number
+    },
+    api: {
+        download: number,
+        limit: number,
+        allow: {
+            bookid: number,
+            time: number
+        }[]
+    },
+    upload: number,
+    email: string,
+}
+
+export type User = _User | ErrorRes
+
+```
+
+## 刷新用户信息
+
+<HTTP text={
+    "POST https://oauth.koroneko.co/auth/user\n" +
+    "Cookie: ***\n" + 
+    "Body null\n\n" +
+    "HTTP/1.1 200 OK\n" +
+    "Content-type: application/json\n\n" +
+    JSON.stringify({ code: 200 }, null, 2)
+} />
+
+:::tip 提示
+- POST请求体可以为任意值，但推荐不携带请求体(为空)
+:::
+
+| 参数 | 类型 | 描述 |
+| --- | --- |  --- |
+| `code` | `number<200\|401>` | 请求码 |
+
