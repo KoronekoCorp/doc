@@ -87,6 +87,16 @@ Authorization头部不需要Bearer/Basic指定令牌类型
 
 响应会列出该书籍ID所拥有的所有子章节
 
+| 参数 | 类型 | 描述 |
+| --- | --- |  --- |
+| `code` | `number<200\|401\|404>` |  请求码 |
+| `data` | `object` | 数据体 |
+| `data.Key` | `string` |  文件Key |
+| `data.ETag` | `string` |  ETag |
+| `data.Size` | `object` |  文件大小 |
+| `data.StorageClass` | `string<"1">` |  文件存储集合 |
+
+
 ### 获取章节
 
 依据上述获取的章节列表，可以获取具体的章节内容
@@ -123,13 +133,25 @@ Authorization头部不变
     }, null, 2)
 } title='HTTP Response' />
 
+| 参数 | 类型 | 描述 |
+| --- | --- |  --- |
+| `code` | `number<200\|401\|404>` |  请求码 |
+| `book_id` | `number` | 书籍BID |
+| `chapter_id` | `number` |  章节CID |
+| `title` | `string\|null` |  标题|
+| `author_name` | `string` |  分享用户名称 |
+| `stime` | `number` |  分享时间 |
+| `mode` | `string<marauder\|post\|vip>` | 分享模式(用户分享均为`vip`，来自STV为`marauder`，`post`代表其他来源) |
+| `txt` | `string` | 章节具体内容 |
+
+剩余信息条目请忽略
 
 ### 代码片段
 
 可直接使用的TypeScirpt类型，仅保留有用的属性
 ```ts
 export interface ErrorRes {
-    code: 401 | 403 | 404
+    code: 401 | 404
 }
 
 interface _Chapers {
@@ -149,7 +171,6 @@ interface _Chaper {
     code: 200
     book_id: number,
     chapter_id: number,
-    /** 分享者 */
     author_name: string,
     stime: number,
     mode: 'post' | 'marauder' | 'vip',
