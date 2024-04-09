@@ -8,7 +8,7 @@ options:
     category: oauth-API
 ---
 
-# 章节API说明
+# 章节API
 
 :::tip 前情提要
 - 此API需要使用`账户凭证`，请查阅[凭证](/docs/oauth-API/token)一节
@@ -37,7 +37,7 @@ import { HTTP } from '../http'
 - 存在未到期的授权时，采用旧授权的到期时间
 - 不存在授权时，当前时间的7天后
 
-也可以通过用户信息API获取到期时间
+也可以通过用户信息API获取到期时间，请查阅[User API](/docs/oauth-API/User#获取用户信息)
 :::
 
 <HTTP text={
