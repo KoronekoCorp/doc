@@ -9,6 +9,7 @@ options:
 ---
 
 import style from '../theme.css';
+import DocCardList from '@theme/DocCardList';
 
 # nhimmeo API
 
@@ -23,16 +24,28 @@ import style from '../theme.css';
 
 ### Terms-Of-Service
 
-> ps：不严谨の协议，但是你违反我就拉闸
-
 1. 禁止用于任何商业盈利用途，包括但不限于：在使用本API的网页上投放广告等一系列产生经济效益的行为
 
 2. 禁止滥用，造成资源上的过度消耗
 
 3. 禁止前台调用
 
-4. API不会收集你的请求本身之外的任何信息
+4. 需要同意如下用户协议与隐私政策
 
+<DocCardList items={
+    [
+        {
+            type: 'link',
+            label: '《隐私政策》',
+            href: "/docs/policy/privacy",
+        },
+        {
+            type: 'link',
+            label: '《用户协议》',
+            href: "/docs/policy/user",
+        }
+    ]
+} />
 
 :::info API说明
 
@@ -43,7 +56,6 @@ API分为两个部分：数据库API 与 章节API
 章节API需要鉴权
 :::
 
-import DocCardList from '@theme/DocCardList';
 
 <DocCardList items={
     [
